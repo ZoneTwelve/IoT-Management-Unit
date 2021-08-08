@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+const app = require('../app');    // service core
+app.set('port', 80);              // setup http port
+app.set('httpsport', 54088);        // setup https port
+const ssl = require('../SSL.js'); // SSL configuration
+const http = require('http');     // import http modules
+const https = require('https');   // import https modules
+const httpServer = http.createServer(app);    // create http server
+const httpsServer = https.createServer(ssl.options, app); // create https server 
+// httpServer.listen(app.get('port')); // binding server on port $(port) # http port
+httpsServer.listen(app.get('httpsport')); // bind server on https
